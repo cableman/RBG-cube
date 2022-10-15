@@ -7,6 +7,9 @@
 
 #include "fonts/Picopixel.h"
 
+#include "lemming_frames.h"
+LemmingFrames lemming1;
+
 #define PIN D1
 
 Adafruit_NeoMatrix panel = Adafruit_NeoMatrix(16, 16, PIN,
@@ -57,17 +60,45 @@ void simpleTime()
   panel.setFont(&Picopixel);
 }
 
+/**
+ * Display time and working lemming.
+ */
+void lemmingWalkWithTime()
+{
+  int offsetRows = 6;
+  int speed = 150;
+ 
+  for (int offsetCols = -6; offsetCols < 16+8; ++offsetCols) {
+    panel.clear();
+
+    panel.setCursor(0, 4);
+    panel.print(myTZ.dateTime("H"));
+
+    panel.setCursor(9, 4);
+    panel.print(myTZ.dateTime("i"));
+   
+    lemming1.nextFrame(&panel, offsetRows, offsetCols);
+
+    // Refreshes display.
+    panel.show();
+  
+    delay(speed);
+  }
+
+}
 
 void setup() {
   panel.begin();
   panel.setBrightness(20);
   panel.clear();
-  panel.println("INIT");
-  panel.show();
-  delay(500);
 
   panel.setFont(&Picopixel);
   panel.setTextSize(1);
+
+  panel.println("INIT");
+  panel.show();
+  delay(500);
+  panel.clear();
 
   // Connect to WIFI.
   MyWifi* myWifi = new MyWifi(&panel);
@@ -78,5 +109,5 @@ void setup() {
 }
 
 void loop() {
-  simpleTime();
+  lemmingWalkWithTime();
 }

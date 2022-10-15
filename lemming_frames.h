@@ -17,7 +17,7 @@ class LemmingFrames
   
   public:
     LemmingFrames();
-    void nextFrame(Adafruit_NeoMatrix pane, int offsetRows, int offsetCols);
+    void nextFrame(Adafruit_NeoMatrix* panel, int offsetRows, int offsetCols);
 };
 
 #endif // __lemming_frames_h
