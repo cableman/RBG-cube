@@ -5,7 +5,7 @@
 #ifndef __lemming_frames_h
 #define __lemming_frames_h
 
-#define FRAMES 4
+#define FRAMES 8
 #define ROWS 10
 #define COLUMNS 6
 
